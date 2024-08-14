@@ -25,6 +25,12 @@ const User = sequelize.define('user', {
 })
 
 
+User.associate = (models) => {
+    User.hasMany(models.Posts, {foreignKey:'userId'})
+    User.hasMany(models.Comment,{foreignKey:'userId'})
+}
+
+
 
 
 export default User

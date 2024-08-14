@@ -1,14 +1,16 @@
-import User from "../models/user.js"
+import models from '../models/index.js'
 import bcrypt from 'bcrypt'
 import CustomError from "../util/CustomError.js"
 import generateToken from '../util/generateToken.js'
+
+
+const { User } = models
 
 const register = async (req, res, next) => {
     try {
         const { name, email, password } = req.body
 
-        console.log(email)
-        const userFound = await User.findOne({ where: {email} })
+        const userFound = await User.findOne({ where: { email } })
 
         if (userFound) {
             throw new CustomError('User already exists', 400)
@@ -29,7 +31,8 @@ const login = async (req, res, next) => {
     try {
         const { email, password } = req.body
 
-        const userFound = await User.findOne({ where: {email} })
+
+        const userFound = await User.findOne({ where: { email } })
 
         if (!userFound) {
             throw new CustomError('User Not exists', 400)
