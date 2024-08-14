@@ -1,6 +1,32 @@
 import models from "../models/index.js"
 
-const { Comment, User } = models
+const { Comment, User, Posts } = models
+
+
+const findProfile = {
+    attributes: ['id', 'name'],
+    include: [
+        {
+            model: Posts,
+            include: [
+                {
+                    model: Comment,
+                    include: [
+                        {
+                            model: User,
+                            attributes: ['id', 'name'],
+                        }
+                    ]
+                }
+            ],
+        }
+    ]
+}
+
+
+const getUserInfo = {attributes: ['id', 'name', 'email']}
+
+
 
 const findBlog = {
     attributes: { exclude: ['userId'] },
@@ -25,4 +51,4 @@ const findBlog = {
     ]
 }
 
-export default { findBlog }
+export default { findBlog, findProfile,getUserInfo }
