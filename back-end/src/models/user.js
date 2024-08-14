@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../config/db";
+import sequelize from "../config/db.js";
 
 
 const User = sequelize.define('user', {
@@ -15,6 +15,7 @@ const User = sequelize.define('user', {
     },
     email:{
         type:DataTypes.STRING,
+        unique:true,
         allowNull:false,
     },
     password:{
