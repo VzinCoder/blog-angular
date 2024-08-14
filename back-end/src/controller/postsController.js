@@ -1,8 +1,10 @@
 import models from '../models/index.js'
 import CustomError from '../util/CustomError.js'
+import options from '../util/customQuery.js'
 
 
-const { Posts } = models
+const { Posts} = models
+
 
 const create = async (req, res, next) => {
     try {
@@ -61,8 +63,9 @@ const update = async (req, res, next) => {
 
 const findById = async (req,res,next) => {
     try {
+        const {findBlog} = options
         const postId = req.params.postId
-        const post =  await Posts.findByPk(postId)
+        const post =  await Posts.findByPk(postId,findBlog)
 
         if (!post) {
             throw new CustomError('Post not found', 404)
@@ -76,7 +79,9 @@ const findById = async (req,res,next) => {
 
 const findAll = async (req, res, next) => {
     try {
-        const posts = await Posts.findAll()
+        const {findBlog} = options
+        console.log(findBlog)
+        const posts = await Posts.findAll(findBlog)
         res.status(200).json(posts)
     } catch (error) {
         next(error)
