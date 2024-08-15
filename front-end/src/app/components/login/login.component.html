@@ -1,0 +1,46 @@
+<div class="wrapper-container">
+    <app-header></app-header>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Login</h2>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" formControlName="email" id="email" placeholder="Enter your email" required>
+                    @if(loginForm.controls.email.invalid && (loginForm.controls.email.touched || loginForm.controls.email.dirty)){
+                        <div class="alert-danger">
+                             @if(loginForm.controls.email.hasError('required')){
+                                <span>Is Required Email!</span>
+                             }
+                             
+                             @if(loginForm.controls.email.hasError('email')){
+                                <span>Invalid Email Format!</span>
+                             }
+    
+                        </div>
+                    }
+    
+                </div>
+               
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" formControlName="password" id="password" placeholder="Enter your password" required>
+                    @if(loginForm.controls.password.invalid && (loginForm.controls.password.touched || loginForm.controls.password.dirty)){
+                        <div class="alert-danger">
+                             @if(loginForm.controls.password.hasError('required')){
+                                <span>Is Required Password!</span>
+                             }
+
+                             @if(loginForm.controls.password.hasError('minlength')){
+                                <span>Password must be at least 8 characters long</span>
+                             }
+                        </div>
+                    }
+                </div>
+
+                <button type="submit" >Login</button>
+            </form>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</div>

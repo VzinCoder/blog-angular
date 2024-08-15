@@ -1,0 +1,14 @@
+header{
+    background-color: #CC3733;
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 40px;
+}
+
+
+.header-txt{
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
