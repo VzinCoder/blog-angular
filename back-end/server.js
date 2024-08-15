@@ -1,6 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import sequelize from './src/config/db.js'
+import cors from 'cors'
 import handleError from './src/middleware/handleError.js'
 import authRouter from './src/routes/authRoutes.js'
 import postsRouter from './src/routes/postsRoutes.js'
@@ -10,6 +11,7 @@ import { routeNotFound } from './src/middleware/routeNotFound.js'
 
 const app = express()
 
+app.use(cors())
 app.use(bodyParser.json())
 
 
@@ -21,16 +23,10 @@ app.use(routeNotFound)
 app.use(handleError)
 
 
-
 const initApp = async () => {
    await sequelize.sync({ alter:true })
    console.log('Database connected')
    app.listen(3000, err => console.log(err || 'Server on'))
 }
 
-
 initApp()
-
-
-
-
